@@ -1,8 +1,8 @@
 # your code goes here
 class Person
-    attr_reader :name, :happiness, :hygiene
     attr_accessor :bank_account
-
+    attr_reader :name, :happiness, :hygiene
+    
     def initialize(name)
         @name = name
         @bank_account = 25
@@ -10,23 +10,23 @@ class Person
         @hygiene = 8
     end
 
-    def happiness=(happiness)
-        @happiness = if happiness < 0
+    def happiness=(value)
+        @happiness = if value >= 10
+           10 
+        elsif value <= 0
             0
-        elsif happiness > 10
-            10
         else
-            happiness
+            value
         end
     end
 
-    def hygiene=(hygiene)
-        @hygiene = if hygiene < 0
+    def hygiene=(value)
+        @hygiene = if value >= 10
+            10 
+        elsif value <= 0
             0
-        elsif hygiene > 10
-            10
         else
-            hygiene
+            value
         end
     end
 
@@ -55,23 +55,25 @@ class Person
     end
 
     def call_friend(friend)
-        self.happiness += 3
         friend.happiness += 3
+        self.happiness += 3
         "Hi #{friend.name}! It's #{self.name}. How are you?"
     end
 
     def start_conversation(friend, topic)
-        if topic == "politics"
-            self.happiness -= 2
+        case topic
+        when "politics"
             friend.happiness -= 2
+            self.happiness -= 2
             "blah blah partisan blah lobbyist"
-        elsif topic == "weather"
-            self.happiness += 1
+        when "weather"
             friend.happiness += 1
+            self.happiness += 1
             "blah blah sun blah rain"
         else
             "blah blah blah blah blah"
         end
+
     end
 
 end
